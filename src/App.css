@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Playball&display=swap');
 
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+  color: #333;
+  line-height: 1.6;
+}
+
 /* Nav Styling */
 .nav {
   display: flex;
@@ -321,9 +330,10 @@
 .add-recipe-form-container {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  height: 100%;
   background-color: #f8f8f8;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
 .add-recipe-form {
