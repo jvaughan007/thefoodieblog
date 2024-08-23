@@ -1,70 +1,103 @@
-# Getting Started with Create React App
+---
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### **Frontend Documentation (React App)**
+
+---
+
+# Frontend: Recipe Blog
+
+## Table of Contents
+1. [Overview](#overview)
+2. [Setup Instructions](#setup-instructions)
+3. [Available Scripts](#available-scripts)
+4. [Environment Variables](#environment-variables)
+5. [Project Structure](#project-structure)
+6. [API Integration](#api-integration)
+7. [Contributing](#contributing)
+
+---
+
+## Overview
+This is the frontend application for the Recipe Blog, built using React. The app allows users to browse, add, edit, and delete recipes. It integrates with a Django backend that handles the database and API logic.
+
+---
+
+## Setup Instructions
+
+1. **Clone the Repository:**
+   ```bash
+   git clone <your-repo-url>
+   cd recipe-blog-frontend
+   ```
+
+2. **Install Dependencies:**
+   Ensure that you have Node.js and Yarn installed on your system. Then run:
+   ```bash
+   yarn install
+   ```
+
+3. **Create Environment Variables:**
+   Create a `.env` file in the root directory and add the following:
+   ```
+   REACT_APP_API_URL=http://127.0.0.1:8000/api/
+   ```
+
+   This points the frontend to your local backend API.
+
+4. **Run the Application:**
+   ```bash
+   yarn start
+   ```
+   The app will be available at `http://localhost:3000`.
+
+---
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+- **`yarn start`**: Runs the app in the development mode.
+- **`yarn build`**: Builds the app for production.
+- **`yarn test`**: Launches the test runner.
+- **`yarn lint`**: Lints the codebase for issues.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Environment Variables
 
-### `npm test`
+Ensure the `.env` file contains the following:
+```
+REACT_APP_API_URL=http://127.0.0.1:8000/api/
+```
+This should be configured to point to your local or production backend URL.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## Project Structure
+Here is a brief overview of the main directories:
+- **`src/components/`**: Contains reusable React components.
+- **`src/pages/`**: Contains the main pages like LandingPage, EditRecipe, AddRecipes.
+- **`src/api/`**: Contains API service functions for communication with the backend.
+- **`src/styles/`**: Contains the CSS files for styling.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## API Integration
+The frontend integrates with the backend via REST API calls. All API requests are handled in `src/api/` using Axios.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Example configuration in `src/api/recipeService.js`:
+```javascript
+import axios from 'axios';
 
-### `npm run eject`
+const API_URL = process.env.REACT_APP_API_URL;
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+// Example API call
+export const getRecipes = () => axios.get(`${API_URL}/recipes/`);
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Contributing
+1. Fork the repository.
+2. Create a new branch for your feature or bugfix.
+3. Submit a pull request once the changes are made.
