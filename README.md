@@ -2,6 +2,7 @@
 
 ### **Frontend Documentation (React App)**
 
+
 ---
 
 # Frontend: Recipe Blog
@@ -84,6 +85,8 @@ Here is a brief overview of the main directories:
 
 ## API Integration
 The frontend integrates with the backend via REST API calls. All API requests are handled in `src/api/` using Axios.
+
+If you'd like to tie in a prebuild backend, you may click [here](https://github.com/jvaughan007/thefoodieblog_backend)!
 
 Example configuration in `src/api/recipeService.js`:
 ```javascript
