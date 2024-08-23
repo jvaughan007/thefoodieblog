@@ -1,5 +1,7 @@
 
 import KetoBrekfst2 from './images/KetoBrekfst2.png';
+import alfredo from './images/alfredo.jpg';
+import carbonara from './images/carbonara.jpg'
 
 export const recipes = [
     {
@@ -7,7 +9,7 @@ export const recipes = [
         title: 'Spaghetti Carbonara',
         author: 'Giuseppi Guanciale',
         description: 'A classic Italian pasta dish made with eggs, cheese, pancetta, and pepper.',
-        image: 'https://cdn.apartmenttherapy.info/image/upload/v1702061337/k/Photo/Recipes/2023-12-carbonara/carbonara-0357.jpg',
+        image: carbonara,
         ingredients: ['Pasta', 'Eggs', 'Bacon', 'Parmesan', 'Pepper'],
         steps: [
             'Boil the pasta until al dente.',
@@ -22,7 +24,7 @@ export const recipes = [
       title: 'Chicken Alfredo',
       author: 'Ezio Auditore',
       description: 'A rich and creamy pasta dish with grilled chicken and Alfredo sauce.',
-      image: 'https://hips.hearstapps.com/hmg-prod/images/chicken-alfredo-index-64ee1026c82a9.jpg?crop=0.9994472084024323xw:1xh;center,top&resize=1200:*',
+      image: alfredo,
       ingredients: ['Pasta', 'Chicken', 'Cream', 'Garlic', 'Parmesan'],
       steps: [
             'Cook the pasta.',

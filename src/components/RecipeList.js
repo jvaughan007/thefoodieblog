@@ -5,7 +5,7 @@ const RecipeList = ({ recipes }) => {
     return (
         <div className="recipe-list">
             {
-                recipes.map(recipe => (
+                recipes.map((recipe) => (
                     <RecipeCard key={recipe.id} recipe={recipe} />
                 ))
             }

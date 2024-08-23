@@ -10,7 +10,18 @@ const RecipeCard = ({ recipe, onDelete }) => {
       <div className="recipe-details">
         <h3>{recipe.title}</h3>
         <p className="author">Foodie: {recipe.author}</p>
-        <p className="description">{recipe.description}</p>
+        
+           {/* Ensure that description is properly handled */}
+        {recipe.description && Array.isArray(recipe.description) ? (
+          recipe.description.map((para, index) => (
+            <p className="description" key={index}>
+              {para}
+            </p>
+          ))
+        ) : (
+          <p className="description">{recipe.description}</p>
+        )}
+        
       </div>
       <Link to={`/recipe/${recipe.id}`} className="view-recipe-link">View Recipe</Link>
       <div className="button-group">
