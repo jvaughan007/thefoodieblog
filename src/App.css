@@ -130,6 +130,8 @@
   background-color: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 1rem;
+  max-width: 500px;
+  max-height: 500px;
 }
 
 .recipe-list .recipe-card .card-image {
@@ -169,6 +171,7 @@
   margin-top: 1rem;
   margin-bottom: 1rem;
   max-height: 4rem;
+  max-width: 250px;
   white-space: normal;
   overflow: hidden;
   text-overflow: ellipsis;
