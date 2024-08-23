@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { createRecipe } from '../api';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // Import Quill's CSS
 
 const AddRecipes = () => {
   const [dishName, setDishName] = useState('');
   const [foodieName, setFoodieName] = useState('');
   const [description, setDescription] = useState('');
+  const [blog, setBlog] = useState(''); // New state for blog using HTML content
   const [steps, setSteps] = useState(['']); // Start with 1 empty step
   const [ingredients, setIngredients] = useState(['']); // Start with 1 empty ingredient
   const [image, setImage] = useState(null);
@@ -18,11 +21,9 @@ const AddRecipes = () => {
     }
   };
 
-  // Handle removing the last step input
-  const removeStep = () => {
-    if (steps.length > 1) {
-      setSteps(steps.slice(0, -1));
-    }
+  // Handle removing a step input
+  const removeStep = (index) => {
+    setSteps(steps.filter((_, i) => i !== index));
   };
 
   // Handle changing a step input
@@ -39,11 +40,9 @@ const AddRecipes = () => {
     }
   };
 
-  // Handle removing the last ingredient input
-  const removeIngredient = () => {
-    if (ingredients.length > 1) {
-      setIngredients(ingredients.slice(0, -1));
-    }
+  // Handle removing an ingredient input
+  const removeIngredient = (index) => {
+    setIngredients(ingredients.filter((_, i) => i !== index));
   };
 
   // Handle changing an ingredient input
@@ -61,15 +60,16 @@ const AddRecipes = () => {
   // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
-    // Convert description to paragraphs (array)
-    const descriptionArray = description.split('\n').filter((para) => para.trim() !== '');
-    console.log(JSON.stringify(descriptionArray));
+
+    // Convert description to a single string with a max of 120 characters
+    const trimmedDescription = description.substring(0, 120);
+
     // Prepare the recipe data
     const recipeData = new FormData();
     recipeData.append('title', dishName);
     recipeData.append('author', foodieName);
-    recipeData.append('description', JSON.stringify(descriptionArray));
+    recipeData.append('description', trimmedDescription);
+    recipeData.append('blog', blog); // Send the blog as HTML content
     recipeData.append('steps', JSON.stringify(steps.filter((step) => step.trim() !== '')));
     recipeData.append('ingredients', JSON.stringify(ingredients.filter((ingredient) => ingredient.trim() !== '')));
     recipeData.append('image', image);
@@ -111,13 +111,24 @@ const AddRecipes = () => {
 
         {/* Description */}
         <div className="form-group">
-          <label htmlFor="description">Description</label>
-          <textarea
+          <label htmlFor="description">Description (Max 120 characters)</label>
+          <input
+            type="text"
             id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            rows="5"
+            maxLength="120"
             required
+          />
+        </div>
+
+        {/* Blog */}
+        <div className="form-group">
+          <label htmlFor="blog">Blog</label>
+          <ReactQuill
+            value={blog}
+            onChange={setBlog} // React Quill provides the content as HTML
+            theme="snow"
           />
         </div>
 
@@ -125,25 +136,24 @@ const AddRecipes = () => {
         <div className="form-group">
           <label>Ingredients</label>
           {ingredients.map((ingredient, index) => (
-            <input
-              key={index}
-              type="text"
-              placeholder={`Ingredient ${index + 1}`}
-              value={ingredient}
-              onChange={(e) => handleIngredientChange(index, e.target.value)}
-              required
-              className='ingredient'
-            />
+            <div key={index} className="ingredient-input">
+              <input
+                type="text"
+                placeholder={`Ingredient ${index + 1}`}
+                value={ingredient}
+                onChange={(e) => handleIngredientChange(index, e.target.value)}
+                required
+                className='ingredient'
+              />
+              <button type="button" className='ingredient-button' onClick={() => removeIngredient(index)}>
+                Remove
+              </button>
+            </div>
           ))}
           <div className="ingredient-buttons">
             {ingredients.length < 30 && (
               <button type="button" className='ingredient-button' onClick={addIngredient}>
-                Add Ingredient
-              </button>
-            )}
-            {ingredients.length > 1 && (
-              <button type="button" className='ingredient-button' onClick={removeIngredient}>
-                Remove Last Ingredient
+                + Ingredient
               </button>
             )}
           </div>
@@ -153,25 +163,24 @@ const AddRecipes = () => {
         <div className="form-group">
           <label>Steps</label>
           {steps.map((step, index) => (
-            <input
-              key={index}
-              type="text"
-              placeholder={`Step ${index + 1}`}
-              value={step}
-              onChange={(e) => handleStepChange(index, e.target.value)}
-              required
-              className='step'
-            />
+            <div key={index} className="step-input">
+              <input
+                type="text"
+                placeholder={`Step ${index + 1}`}
+                value={step}
+                onChange={(e) => handleStepChange(index, e.target.value)}
+                required
+                className='step'
+              />
+              <button type="button" className='step-button' onClick={() => removeStep(index)}>
+                Remove
+              </button>
+            </div>
           ))}
           <div className="step-buttons">
             {steps.length < 30 && (
               <button type="button" className='step-button' onClick={addStep}>
-                Add Step
-              </button>
-            )}
-            {steps.length > 1 && (
-              <button type="button" className='step-button' onClick={removeStep}>
-                Remove Last Step
+                + Step
               </button>
             )}
           </div>

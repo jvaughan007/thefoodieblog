@@ -9,6 +9,7 @@ export const recipes = [
         title: 'Spaghetti Carbonara',
         author: 'Giuseppi Guanciale',
         description: 'A classic Italian pasta dish made with eggs, cheese, pancetta, and pepper.',
+        blog: "<p>ohlfdsnxzlfnlz</p><p><br></p><p>fxzfvdsxfxzfxzfzx</p><p><br></p><p><br></p><p>fdsfsxfxzvxzvzXcxz</p>",
         image: carbonara,
         ingredients: ['Pasta', 'Eggs', 'Bacon', 'Parmesan', 'Pepper'],
         steps: [
@@ -24,6 +25,7 @@ export const recipes = [
       title: 'Chicken Alfredo',
       author: 'Ezio Auditore',
       description: 'A rich and creamy pasta dish with grilled chicken and Alfredo sauce.',
+      blog: "",
       image: alfredo,
       ingredients: ['Pasta', 'Chicken', 'Cream', 'Garlic', 'Parmesan'],
       steps: [
@@ -38,6 +40,7 @@ export const recipes = [
         title: 'Perfect Keto Breakfast',
         author: 'Josh Vaughan',
         description: 'A hearty, filling, and satisfying ketogenic kickstart to your day!',
+        blog: "",
         image: KetoBrekfst2,
         ingredients: ['3 large, organic, free-range eggs', '1oz room temp grass fed Irish butter (Kerrygold), separated ', '1 large hass avocado', '4-6 strips of thick cut bacon', 'dill, salt, pepper, and garlic powder to taste'],
         steps: [

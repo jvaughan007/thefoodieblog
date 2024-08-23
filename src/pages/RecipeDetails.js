@@ -1,13 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { recipes } from '../mockData';
+import { getRecipeById } from '../api/recipeService';
 
 const RecipeDetails = () => {
   const { id } = useParams();
-  const recipe = recipes.find((recipe) => recipe.id === parseInt(id));
+  const [recipe, setRecipe] = useState(null);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchRecipe = async () => {
+      try {
+        const fetchedRecipe = await getRecipeById(id);
+        setRecipe(fetchedRecipe);
+      } catch (err) {
+        setError('Recipe not found!');
+      }
+    };
+
+    fetchRecipe();
+  }, [id]);
+
+  if (error) {
+    return <h2>{error}</h2>;
+  }
 
   if (!recipe) {
-    return <h2>Recipe not found!</h2>;
+    return <h2>Loading...</h2>;
   }
 
   return (
@@ -15,7 +33,12 @@ const RecipeDetails = () => {
       <h2>{recipe.title}</h2>
       <h4>Foodie: {recipe.author}</h4>
       <img src={recipe.image} alt={recipe.title} />
-      
+
+      <div className="blog-section">
+        {/* Render the blog content as HTML */}
+        <div dangerouslySetInnerHTML={{ __html: recipe.blog }} />
+      </div>
+
       <div className="ingredients-section">
         <h3>Ingredients:</h3>
         <ul>

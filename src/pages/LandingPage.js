@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import RecipeList from "../components/RecipeList";
 import { getRecipes } from "../api";
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
     const [recipes, setRecipes] = useState([]);
@@ -18,6 +19,9 @@ const LandingPage = () => {
         fetchRecipes();
     }, []);
 
+    // Filter to get the three most recent recipes
+    const latestRecipes = recipes.slice(-3).reverse(); // Reverse to get the latest first
+
     return (
         <div className="landing-page">
             <div className="welcome">
@@ -25,11 +29,13 @@ const LandingPage = () => {
             </div>
             <div className="featured">
                 <h1>Check out our latest recipes!</h1>
-                <RecipeList recipes={recipes}/>
+                <RecipeList recipes={latestRecipes} />
+                <div className="view-all-recipes-link">
+                    <Link to="/recipes">See all of our recipes</Link>
+                </div>
             </div>
         </div>
     );
 };
 
-
-export default LandingPage
+export default LandingPage;

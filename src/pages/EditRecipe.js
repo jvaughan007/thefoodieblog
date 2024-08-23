@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { getRecipeById, updateRecipe } from '../api/recipeService'; // Assuming the correct path
 import EditRecipeForm from '../components/EditRecipeForm';
-import { recipes as recipesData } from '../mockData'; // Replace with your actual data source
 
 const EditRecipe = () => {
   const { id } = useParams();
@@ -9,23 +9,40 @@ const EditRecipe = () => {
   const [recipe, setRecipe] = useState(null);
 
   useEffect(() => {
-    const recipeToEdit = recipesData.find((r) => r.id === parseInt(id));
-    if (recipeToEdit) {
-      setRecipe(recipeToEdit);
-    } else {
-      navigate('/'); // Redirect if the recipe is not found
-    }
-  }, [id, navigate]);
+    // Fetch the recipe data when the component loads
+    const fetchRecipe = async () => {
+      try {
+        const fetchedRecipe = await getRecipeById(id);
+        setRecipe(fetchedRecipe);
+      } catch (error) {
+        console.error('Error fetching recipe:', error);
+      }
+    };
+    fetchRecipe();
+  }, [id]); // Dependency array includes `id` to re-fetch if the ID changes
 
-  const handleSave = (updatedRecipe) => {
-    // Implement your update logic here, such as updating the state or making an API call
-    console.log('Updated Recipe:', updatedRecipe);
-    navigate('/'); // Redirect to the homepage after saving changes
+  const handleSave = async (formData) => {
+    try {
+      await updateRecipe(id, formData); // Assuming `updateRecipe` handles the PUT request
+      // After successful update, fetch the updated data
+      const updatedRecipe = await getRecipeById(id);
+      setRecipe(updatedRecipe);
+      // Redirect to the updated recipe's detail page
+      navigate(`/recipe/${id}`);
+    } catch (error) {
+      console.error('Error updating recipe:', error);
+    }
   };
 
-  if (!recipe) return <p>Loading...</p>;
+  if (!recipe) return <div>Loading...</div>;
 
-  return <EditRecipeForm recipe={recipe} onSave={handleSave} />;
+  return (
+    <div className='edit-recipe-page'>
+      <div className='edit-recipe-page-form-container'>
+      <EditRecipeForm recipe={recipe} onSave={handleSave} />
+      </div>
+    </div>
+  );
 };
 
 export default EditRecipe;

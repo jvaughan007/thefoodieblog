@@ -17,9 +17,12 @@ export const getRecipes = async () => {
 // Get a specific recipe by its ID
 export const getRecipeById = async (id) => {
     try {
-        const response = await axios.get(`${API_URL}/recipes/${id}`);
+        console.log(`Axios request: ${API_URL}/recipes/${id}`);
+        const response = await axios.get(`${API_URL}/recipes/${id}/`);
         return response.data;
     } catch (error) {
+        console.log(`API URL: ${API_URL}`);
+        console.log(`Axios request: ${API_URL}/recipes/${id}`);
         console.log('Error fetching recipes: ', error);
         throw error;
     }
