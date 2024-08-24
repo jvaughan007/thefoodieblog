@@ -40,7 +40,8 @@ This is the frontend application for the Recipe Blog, built using React. The app
 3. **Create Environment Variables:**
    Create a `.env` file in the root directory and add the following:
    ```
-   REACT_APP_API_URL=http://127.0.0.1:8000/api/
+   REACT_APP_API_URL=http://127.0.0.1:8000/api
+   REACT_APP_IMAGE_URL=http://127.0.0.1:8000
    ```
 
    This points the frontend to your local backend API.
