@@ -69,7 +69,8 @@ In the project directory, you can run:
 
 Ensure the `.env` file contains the following:
 ```
-REACT_APP_API_URL=http://127.0.0.1:8000/api/
+REACT_APP_API_URL=http://127.0.0.1:8000/api
+REACT_APP_IMAGE_URL=http://127.0.0.1:8000
 ```
 This should be configured to point to your local or production backend URL.
 
